@@ -1,9 +1,24 @@
 LLM Telecom Log Intelligence
 =============================
 
-This project builds an end-to-end NLP and Machine Learning system to
-semantically analyze LTE MME logs and generate human-readable
-explanations using a Large Language Model (LLM).
+This project implements an end-to-end pipeline for telecom log intelligence:
+
+1. **Log Preprocessing & Vectorization**
+   - Clean and tokenize raw MME logs
+   - Vectorize using custom TF-IDF and transformer embeddings
+
+2. **Semantic Clustering**
+   - Group similar signaling behaviors using HDBSCAN
+   - Extract top keywords to characterize each group
+
+3. **Representative Log Sampling**
+   - Extract sample logs per cluster for contextual relevance
+
+4. **LLM-Based Explanation Layer**
+   - Use a Large Language Model to generate human-readable
+     explanations for each cluster
+   - Explanations include procedure descriptions, behavior
+     classification, and troubleshooting guidance
 
 Pipeline Overview
 -------------
@@ -82,10 +97,22 @@ Notes & customization
 - The preprocessing pipeline currently keeps only `NOUN` and `PROPN` lemmas —
 	adjust `lib/fast_nlp_pipeline()` if you want different token selections.
 
-Output
+Example LLM Output
 ------
-- Cluster explanations: `output/cluster_explanations.json` (JSON mapping of
-	cluster ID -> explanation text).
+- Cluster explanations: `output/cluster_explanations.json` (JSON mapping ofcluster ID -> explanation text).
+```json
+{
+  "UE Attach (Normal)": [
+    "Represents standard attach flow.",
+    "Behavior is normal.",
+    "No specific action required."
+  ],
+  "Inactivity / Abnormal Release": [
+    "Indicates abnormal session termination due to inactivity.",
+    "Possible root causes: inactivity timer expiry, radio drop.",
+    "Recommend verifying ECM timers and radio conditions."
+  ]
+}
 
 Contributing
 ------------
