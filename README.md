@@ -1,8 +1,23 @@
 LLM Telecom Log Intelligence
 =============================
 
-Quick project to preprocess telecom logs, cluster them using embeddings, and
-generate human-readable cluster explanations via a LLM (Google Gemini).
+This project builds an end-to-end NLP and Machine Learning system to
+semantically analyze LTE MME logs and generate human-readable
+explanations using a Large Language Model (LLM).
+
+Pipeline Overview
+-------------
+- Preprocess logs and vectorize text using NLP techniques.
+- Cluster log entries to find semantic groups.
+- Extract top keywords and representative samples per cluster.
+- Format prompts and call an LLM (e.g., Google Gemini) to generate cluster explanations.
+- Output cluster explanations in JSON.
+
+Deliverables
+-------------
+- Code modules for each step.
+- Explanations written by an LLM for each meaningful cluster.
+- Documentation explaining how to run and interpret results.
 
 Requirements
 -------------

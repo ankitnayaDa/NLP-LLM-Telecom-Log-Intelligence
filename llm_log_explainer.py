@@ -75,18 +75,12 @@ def generate_cluster_prompts(df, max_logs=10):
     for cluster_id in sorted(df.cluster.unique()):
         if cluster_id == -1:
             continue  # skip noise
-        print(f"\n=== generate_cluster_prompts ===\n",cluster_id)
         cluster_df = df[df.cluster == cluster_id]
-        print(f"\n=== generate_cluster_prompts ===\n",cluster_df)
         sample_logs = (cluster_df["clean_log"].head(max_logs).tolist())
-        print(f"\n=== generate_cluster_prompts ===\n",sample_logs)
         keywords = extract_cluster_keywords(df, cluster_id)
-        print(f"\n=== generate_cluster_prompts ===\n",keywords)
         cluster_label = f"Cluster-{cluster_id}"
-        print(f"\n=== generate_cluster_prompts ===\n",cluster_label)
         prompt = build_cluster_prompt(cluster_label=cluster_label,keywords=keywords,sample_logs=sample_logs)
         cluster_prompts[cluster_id] = prompt
-        print(f"\n=== generate_cluster_prompts ===\n",cluster_prompts[cluster_id])
     return cluster_prompts
 
 def build_cluster_prompt(cluster_label,keywords,sample_logs):
