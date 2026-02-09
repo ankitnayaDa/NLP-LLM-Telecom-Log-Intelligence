@@ -113,6 +113,7 @@ Example LLM Output
     "Recommend verifying ECM timers and radio conditions."
   ]
 }
+```json
 
 Contributing
 ------------
